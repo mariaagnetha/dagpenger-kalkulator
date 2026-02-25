@@ -11,7 +11,11 @@ Du kan lese mer [om hvordan kalkulatoren fungerer her](https://github.com/navikt
 Du leverer inn din besvarelse på oppgaven ved å publisere den i et GitHub repository og legger til følgende
 brukere som collaborators:
 - perkynades
-- hanneanes
+- sindreh-navikt
+- PauliusDeveika
+- Martineem
+- brahabra
+- murvold
 
 **Frist for å levere besvarelsen er etter avtale**
 
