@@ -19,7 +19,7 @@ public class SaksbehandlerService {
      * Lager en sak basert på dagsats og beregnet spesialisering.
      * 
      * @param dagpengerKalkulator kalkulatoren som har kalkulert dagsatsen.
-     * @param sakId               id til saken.
+     * @param sakId id til saken.
      * @return ny sak.
      */
     public Sak lagSak(DagpengerKalkulator dagpengerKalkulator, String sakId) {
@@ -32,10 +32,10 @@ public class SaksbehandlerService {
 
     /**
      * Behandler en sak ved å sette behandlingsstatus for en sak.
-     * En saksbehandler skal kun kunne behandle saker innenfor sin spesialisering
+     * En saksbehandler skal kun kunne behandle saker innenfor sin spesialisering.
      * 
-     * @param saksbehandler     saksbehandleren som skal behandle saken.
-     * @param sak               saken som skal behandles.
+     * @param saksbehandler saksbehandleren som skal behandle saken.
+     * @param sak saken som skal behandles.
      * @param behandlingsStatus den behandlingsstatusen som saken skal settes til etter behandling.
      */
     public void behandleSak(Saksbehandler saksbehandler, Sak sak, BehandlingsStatus behandlingsStatus) {
@@ -52,6 +52,9 @@ public class SaksbehandlerService {
       sak.settBehandlingsStatus(behandlingsStatus);
     }
 
+    /**
+     * Legger til en sak i registeret.
+     */
     private void leggTilSak(Sak sak) {
       this.saker.add(sak);
     }
