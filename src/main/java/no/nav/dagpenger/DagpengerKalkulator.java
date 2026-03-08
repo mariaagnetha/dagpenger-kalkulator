@@ -1,6 +1,7 @@
 package no.nav.dagpenger;
 
 import no.nav.grunnbeløp.GrunnbeløpVerktøy;
+import no.nav.saksbehandler.Spesialisering;
 import no.nav.årslønn.Årslønn;
 
 import java.util.ArrayList;
@@ -31,10 +32,6 @@ public class DagpengerKalkulator {
     public DagpengerKalkulator(GrunnbeløpVerktøy grunnbeløpVerktøy) { 
         this.grunnbeløpVerktøy = grunnbeløpVerktøy;
         this.årslønner = new ArrayList<>();
-    }
-
-    public enum BeregningsMetode {
-        SISTE_ÅRSLØNN, GJENNOMSNITTET_AV_TRE_ÅR, MAKS_ÅRLIG_DAGPENGERGRUNNLAG
     }
 
     /**
@@ -90,11 +87,43 @@ public class DagpengerKalkulator {
         return BeregningsMetode.GJENNOMSNITTET_AV_TRE_ÅR;
     }
 
+    /**
+     * Beregner spesialisering for en sak basert på dagsatsen og beregningsmetoden brukt til å kalkulere dagsatsen.
+     * 
+     * Antagelse: Hvis dagsatsen er 0kr, som en antagelse på at det er det samme som å ikke ha rett på dagpenger, 
+     * skal spesialiseringen være AVSLAG_PÅ_GRUNN_AV_FOR_LAV_INNTEKT.
+     * Hvis beregningsmetoden er MAKS_ÅRLIG_DAGPENGERGRUNNLAG, betyr det at personen
+     * har rett på dagpenger og spesialiseringen er INNVILGET_MED_MAKSSATS.
+     * Hvis beregningsmetoden er SISTE_ÅRSLØNN eller GJENNOMSNITTET_AV_TRE_ÅR, betyr
+     * det at personen har rett på dagpenger og spesialiseringen er INNVILGET.
+     * 
+     * @param dagsats    dagsatsen kalkulert for en sak.
+     * @param kalkulator kalkulatoren som har kalkulert dagsatsen, brukes for å hente ut beregningsmetoden brukt til å kalkulere dagsatsen.
+     * @return spesialisering for en sak.
+     */
+    public Spesialisering beregnSpesialisering(double dagsats, DagpengerKalkulator kalkulator) {
+      if (dagsats == 0) {
+        return Spesialisering.AVSLAG_PÅ_GRUNN_AV_FOR_LAV_INNTEKT;
+      }
+      if (kalkulator.velgBeregningsMetode() == BeregningsMetode.MAKS_ÅRLIG_DAGPENGERGRUNNLAG) {
+        return Spesialisering.INNVILGET_MED_MAKSSATS;
+      }
+      return Spesialisering.INNVILGET;
+    }
+
+    /**
+     * Legger til årslønn i årslønner listen, og sorterer listen slik at nyeste årslønn er det første elementet.
+      * @param årslønn årslønnen som skal legges til.
+     */
     public void leggTilÅrslønn(Årslønn årslønn) {
         this.årslønner.add(årslønn);
         this.sorterÅrslønnerBasertPåNyesteÅrslønn();
     }
 
+    /**
+     * Henter siste årslønn (indeks 0).
+     * @return siste årslønn, eller 0.0 hvis det ikke finnes.
+     */
     private double hentSisteÅrslønn() {
         return hentÅrslønnVedIndeks(0).map(Årslønn::hentÅrslønn).orElse(0.0); 
     }
