@@ -1,5 +1,6 @@
 package dagpenger;
 
+import no.nav.dagpenger.BeregningsMetode;
 import no.nav.dagpenger.DagpengerKalkulator;
 import no.nav.grunnbeløp.GrunnbeløpVerktøy;
 import no.nav.årslønn.Årslønn;
@@ -56,7 +57,7 @@ public class DagpengerKalkulatorTester {
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2025, 550000));
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2023, 110000));
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2024, 24000));
-        assertEquals(DagpengerKalkulator.BeregningsMetode.SISTE_ÅRSLØNN, dagpengerKalkulator.velgBeregningsMetode());
+        assertEquals(BeregningsMetode.SISTE_ÅRSLØNN, dagpengerKalkulator.velgBeregningsMetode());
     }
 
     @Test
@@ -66,7 +67,7 @@ public class DagpengerKalkulatorTester {
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2025, 830000));
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2023, 110000));
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2024, 24000));
-        assertEquals(DagpengerKalkulator.BeregningsMetode.MAKS_ÅRLIG_DAGPENGERGRUNNLAG, dagpengerKalkulator.velgBeregningsMetode());
+        assertEquals(BeregningsMetode.MAKS_ÅRLIG_DAGPENGERGRUNNLAG, dagpengerKalkulator.velgBeregningsMetode());
     }
 
     @Test
@@ -76,7 +77,7 @@ public class DagpengerKalkulatorTester {
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2025, 330000));
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2023, 400000));
         dagpengerKalkulator.leggTilÅrslønn(new Årslønn(2024, 334000));
-        assertEquals(DagpengerKalkulator.BeregningsMetode.GJENNOMSNITTET_AV_TRE_ÅR, dagpengerKalkulator.velgBeregningsMetode());
+        assertEquals(BeregningsMetode.GJENNOMSNITTET_AV_TRE_ÅR, dagpengerKalkulator.velgBeregningsMetode());
     }
 
     @Test
