@@ -97,7 +97,7 @@ public class DagpengerKalkulator {
      * Hvis beregningsmetoden er SISTE_ÅRSLØNN eller GJENNOMSNITTET_AV_TRE_ÅR, betyr
      * det at personen har rett på dagpenger og spesialiseringen er INNVILGET.
      * 
-     * @param dagsats    dagsatsen kalkulert for en sak.
+     * @param dagsats dagsatsen kalkulert for en sak.
      * @param kalkulator kalkulatoren som har kalkulert dagsatsen, brukes for å hente ut beregningsmetoden brukt til å kalkulere dagsatsen.
      * @return spesialisering for en sak.
      */
@@ -132,8 +132,8 @@ public class DagpengerKalkulator {
      * Beregner gjennomsnittet av tre årslønner.
      * 
      * Antagelse: hvis man har mindre enn tre årslønner skal det beregnes gjennomsnitt av antall tilgjengelige årslønner.
-     * Kan endres til å dele på 3 uansett eller kaste exception
-     * @return gjennomsnittet av nylige årslønn
+     * Kan endres til å dele på 3 uansett hva eller kaste exception.
+     * @return gjennomsnittet av nylige årslønn.
      */
     private double beregnGjennomsnittAvTreÅrslønner() {
         int antallTilgjengeligeÅrslønner = Math.min(3, årslønner.size());
@@ -173,8 +173,7 @@ public class DagpengerKalkulator {
 
     /**
      * Sorterer registeret slik at den nyligste årslønnen er det først elementet i registeret.
-     * Først blir årslønnene i registeret sortert ut at den eldstre årslønnen skal først i registeret,
-     * deretter blir registeret reversert.
+     * Årslønnene sorteres og reverseres direkte slik at nyeste årslønn er det første elementet i registeret.
      */
     public void sorterÅrslønnerBasertPåNyesteÅrslønn() {
         this.årslønner.sort(Comparator.comparingInt(Årslønn::hentÅretForLønn).reversed());
